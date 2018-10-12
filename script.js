@@ -1,5 +1,5 @@
 function add(n, m){
-  return n + m;
+  return Number(n) + Number(m);
 }
 
 function subtract(n, m){
@@ -52,6 +52,7 @@ function calculate(origArray){
   let operatorsArray = origArray.join("").split(/\d+/);
   let numbersLength = numbersArray.length;
   let operatorsLength = operatorsArray.length;
+  let position = 1;
 
   console.log("before the loop begins");
   console.log(numbersArray);
@@ -59,7 +60,6 @@ function calculate(origArray){
 
   //Multiplication and Division calculations
   for(i = 1; i < operatorsLength - 1; i++){
-    let position = 1;
 
     console.log(`i = ${i}`);
     console.log(`position = ${position}`);
@@ -107,8 +107,34 @@ function calculate(origArray){
     console.log(operatorsArray);
   };
 
+  //Addition and Subtraction calculations
+  position = 1;
+
+  for(i = 1; i < operatorsLength - 1; i++){
+
+    if(operatorsArray[position] == "+"){
+      let newElement = add(numbersArray[position - 1], numbersArray[position]);
+
+      operatorsArray = exciseElement(operatorsArray, position);
+      numbersArray = exciseElement(numbersArray, position - 1);
+      numbersArray = exciseElement(numbersArray, position - 1);
+
+      numbersArray = numbersArray.slice(0, position - 1).concat(newElement).concat(numbersArray.slice(position - 1));
+    }
+
+    if(operatorsArray[position] == "-"){
+      let newElement = subtract(numbersArray[position - 1], numbersArray[position]);
+
+      operatorsArray = exciseElement(operatorsArray, position);
+      numbersArray = exciseElement(numbersArray, position - 1);
+      numbersArray = exciseElement(numbersArray, position - 1);
+
+      numbersArray = numbersArray.slice(0, position - 1).concat(newElement).concat(numbersArray.slice(position - 1));
+    }
+  };
+
   console.log(`end of the function`);
-  console.dir(`numbersArray = ${numbersArray}`);
+  console.log(`numbersArray = ${numbersArray}`);
   console.log(`operatorsArray = ${operatorsArray}`);
 
 };
