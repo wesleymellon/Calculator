@@ -34,6 +34,13 @@ Array.from(numbers).forEach(function(element){
 
 Array.from(operators).forEach(function(element){
   element.addEventListener("click", function(e){
+    console.log(expressionArray[expressionArray.length - 1]);
+    if(!(expressionArray[0] == undefined) && isNaN(expressionArray[expressionArray.length - 1])){
+      console.log("popping!");
+      console.log(`expression array before pop ${expressionArray}`);
+      expressionArray.pop();
+      console.log(`expression array after pop ${expressionArray}`);
+    };
     expressionArray.push(e.srcElement.innerHTML);
     display.innerHTML = expressionArray.join(" ");
   });
@@ -42,6 +49,12 @@ Array.from(operators).forEach(function(element){
 allClear.addEventListener("click", function(e){
   expressionArray = [];
   display.innerHTML = "0";
+});
+
+enter.addEventListener("click", function(e){
+  let calculatedNumber = calculate(expressionArray);
+  expressionArray = [calculatedNumber];
+  display.innerHTML = expressionArray.join(" ");
 });
 
 let testArrayPlus = ["5", "+", "6", "*", "3", "/", "2", "0"];
@@ -136,6 +149,7 @@ function calculate(origArray){
   console.log(`end of the function`);
   console.log(`numbersArray = ${numbersArray}`);
   console.log(`operatorsArray = ${operatorsArray}`);
+  return numbersArray[0];
 
 };
 
