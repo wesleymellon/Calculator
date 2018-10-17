@@ -23,12 +23,12 @@ let numbers = document.getElementsByClassName("number");
 let display = document.getElementById("display");
 let allClear = document.getElementById("clear");
 let operators = document.getElementsByClassName("operator");
-let enter = document.getElementById("enter");
+let equal = document.getElementById("equal");
 
 Array.from(numbers).forEach(function(element){
   element.addEventListener("click", function(e){
     expressionArray.push(e.srcElement.innerHTML);
-    display.innerHTML = expressionArray.join(" ");
+    display.innerHTML = expressionArray.join("");
   });
 });
 
@@ -42,7 +42,7 @@ Array.from(operators).forEach(function(element){
       console.log(`expression array after pop ${expressionArray}`);
     };
     expressionArray.push(e.srcElement.innerHTML);
-    display.innerHTML = expressionArray.join(" ");
+    display.innerHTML = expressionArray.join("");
   });
 });
 
@@ -51,21 +51,40 @@ allClear.addEventListener("click", function(e){
   display.innerHTML = "0";
 });
 
-enter.addEventListener("click", function(e){
+equal.addEventListener("click", function(e){
   let calculatedNumber = calculate(expressionArray);
-  expressionArray = [calculatedNumber];
-  display.innerHTML = expressionArray.join(" ");
+  if(calculatedNumber == undefined){
+    expressionArray = [];
+    display.innerHTML = "0";
+  }
+  else{
+    expressionArray = [calculatedNumber];
+    display.innerHTML = expressionArray.join("");
+  };
 });
 
-let testArrayPlus = ["5", "+", "6", "*", "3", "/", "2", "0"];
+let testArrayPlus = ["5", "+", "6.5", "*", "3", "/", "2", "0"];
 let testArray = ["5", "6", "*", "3", "/", "2", "0"];
+let testExpression = ["5", "6", ".", "5", "*", "3", "/", "2", "0"]
 
 function calculate(origArray){
-  let numbersArray = origArray.join("").split(/\D+/);
-  let operatorsArray = origArray.join("").split(/\d+/);
+  // let numbersArray = origArray.join("").split(/\D+/);
+  // let operatorsArray = origArray.join("").split(/\d+/);
+  let numbersArray = origArray.join("").split(/[^0-9\.]+/);
+  let operatorsArray = origArray.join("").split(/[0-9\.]+/);
   let numbersLength = numbersArray.length;
   let operatorsLength = operatorsArray.length;
   let position = 1;
+
+  //First Check if the first and last elements of the origArray are numbers or .
+  console.log(`origArray[0] = ${origArray[0]}`);
+  console.log(`origArray[last] = ${origArray[origArray.length - 1]}`);
+  if(/[^0-9\.]+/.test(origArray[0]) || /[^0-9\.]+/.test(origArray[origArray.length - 1])){
+    alert("Please Enter a Valid Mathematical Expression");
+    console.log(expressionArray);
+    return undefined;
+  }
+  //Second Check through the array to see if there is any division by 0
 
   console.log("before the loop begins");
   console.log(numbersArray);
