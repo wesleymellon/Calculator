@@ -18,19 +18,35 @@ function operate(n, m, operator){
   return operator(n, m);
 }
 
+let acceptedExpressionValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", "."];
 let expression = "";
 let numbers = document.getElementsByClassName("number");
 let operators = document.getElementsByClassName("operator");
-// let decimal = document.getElementById("decimal");
 let display = document.getElementById("display");
 let equal = document.getElementById("equal");
 let clear = document.getElementById("clear");
 let allClear = document.getElementById("allClear");
 
-//event listener event.key or something like that
-
 document.addEventListener("keydown", function(e){
-  console.log(e);
+  if(acceptedExpressionValues.includes(e.key)){
+    expression += e.key;
+    display.innerHTML = expression;
+  }
+
+  else if(e.key === "Backspace"){
+    expression = expression.toString();
+    expression = expression.slice(0, expression.length - 1);
+    display.innerHTML = expression;
+    if(expression == ""){
+      display.innerHTML = "0";
+    };
+  }
+
+  else if(e.key === "Enter"){
+    let calculatedNumber = eval(expression);
+    expression = calculatedNumber;
+    display.innerHTML = expression;
+  }
 });
 
 Array.from(numbers).forEach(function(element){
