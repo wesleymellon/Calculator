@@ -89,16 +89,22 @@ button{
   height: 132px;
 }
 
-#displayText{
-  font-size: 32px;
+#textContainer{
   width: 400px;
   height: 112px;
   margin: 10px;
-  text-align: right;
   background-color: white;
   position: absolute;
-/*  margin-left: 25px;
-*/
+}
+
+#displayText{
+  font-size: 36px;
+  width: 90%;
+  height: 50%;
+  text-align: right;
+  transform: translate(0, 50%);
+  vertical-align: middle;
+  line-height: 56px;
 }
 
 #allClear{
