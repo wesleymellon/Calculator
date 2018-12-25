@@ -50,6 +50,7 @@ table {
 /*Original Code */
 
 body{
+  font-family: 'Aleo', serif;
 }
 
 canvas{
@@ -64,29 +65,38 @@ canvas{
   transform: translate(-50%, -50%);
 
   border-style: solid;
-  border-width: 5px;
+  border-width: 0px;
   border-color: white;
+  border-radius: 10px;
 }
 
 #buttonHolder{
   display: grid;
 
   width: 420px;
-  height: 600px;
+  height: 540px;
 
   grid-template-columns: auto auto auto auto;
   grid-template-rows: auto auto auto auto auto;
-  grid-gap: 10px;
+  grid-gap: 4px;
+  border-radius: 10px;
 }
 
 button{
-  background-color: white;
+  background-color: rgba(122,188,255, 1);
   font-size: 32px;
+  border-radius: 10px;
+  transition: background-color 1s;
+}
+
+button:hover{
+  background-color: rgba(122,188,255, 0.6);
 }
 
 #displayContainer{
   width: 420px;
   height: 132px;
+  border-radius: 10px;
 }
 
 #textContainer{
@@ -95,6 +105,8 @@ button{
   margin: 10px;
   background-color: white;
   position: absolute;
+  border-radius: 10px;
+  background-color: rgba(230, 238, 245, 1.0);
 }
 
 #displayText{
@@ -105,6 +117,7 @@ button{
   transform: translate(0, 50%);
   vertical-align: middle;
   line-height: 56px;
+  border-radius: 10px;
 }
 
 #allClear{

@@ -36,7 +36,7 @@ function animate(){
   requestAnimationFrame(animate);
   // c.clearRect(0, 0, innerWidth, innerHeight);
 
-  c.fillStyle = "rgb(31, 35, 44)";
+  c.fillStyle = "white";
   c.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
   // for(i = 0; i < circleArray.length; i++){
@@ -67,16 +67,16 @@ function GenerateNumberArray(bound, length){
   for(i = 0; i < length; i++){
     let x = Math.random() * innerWidth;
     let y = Math.random() * innerHeight;
-    let dy = Math.random() * 1.25 + 0.25;
+    let dy = Math.random() * 2.4 + 0.2;
     let number = Math.random() * bound;
-    let color = i % 2 == 0 ? "red" : "white";
+    let color = i % 2 == 0 ? "black" : "grey";
     number = Math.floor(number);
-    numberArray.push(new NumberImage(x, y, 0, dy, "24px serif", number, color));
+    numberArray.push(new NumberImage(x, y, 0, dy, "24px Aleo", number, color));
   }
   return;
 };
 
-GenerateNumberArray(10, 50);
+GenerateNumberArray(10, 100);
 
 function NumberImage(x, y, dx, dy, font, text, color){
   this.x = x;
@@ -88,16 +88,17 @@ function NumberImage(x, y, dx, dy, font, text, color){
 
   this.draw = function(){
     c.font = font;
-    c.shadowBlur = 10;
-    if(color == "white"){
-      c.shadowColor = "white";
-      c.fillStyle = "white";
+    c.shadowBlur = 0;
+    if(color == "grey"){
+      c.shadowColor = "grey";
+      c.fillStyle = "grey";
+      //c.fillStyle = "rgba(248, 150, 93, 1)";
     }
 
-    else if(color == "red"){
+    else if(color == "black"){
 
-      c.shadowColor = "rgb(255, 87, 87)";
-      c.fillStyle = "rgb(255, 87, 87)";
+      c.shadowColor = "black";
+      c.fillStyle = "black";
     }
 
     c.fillText(this.text, this.x, this.y);
